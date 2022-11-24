@@ -1,0 +1,10 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
+
+# Builds project, moves the executable to top of project directory and runs it
+
+cmake -B build
+cmake --build build
+mv $(pwd)/build/pName $(pwd)/pName
+
+./pName "$@"

@@ -1,0 +1,12 @@
+#ifndef _INCLUDED_includename_H
+#define _INCLUDED_includename_H
+
+class className {
+private:
+
+public:
+    className();
+    ~className();
+};
+
+#endif // _INCLUDED_includename_H 

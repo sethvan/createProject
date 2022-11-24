@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Sbsolute path to directory where you want to create project should be first argument.
+# If you want it in the current directory put $(pwd).
+# Name of app to be used in files is the second argument, should be altogether, no spaces
+# because it will also be the directory and project name.
+
+cd $1
+mkdir $2
+cd $2
+mkdir build include src res
+touch src/main.cpp
+printf "#include <iostream> \n \n int main(){ \n \n \tstd::cout << \" Hello world! \" << std::endl; \n \n \treturn 0; \n \n }" > src/main.cpp 
+
+replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/cmaketemplate.txt pName "${2,,}" CMakeLists.txt
+replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/runtemplate.txt pName $2 run
+chmod 755 run
+
+cp /home/$USER/myCommands/templates/projectFileTemplates/createclasstemplate.txt createclass
+chmod 755 createclass
+
+cd ..
+code $2

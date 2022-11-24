@@ -1,0 +1,37 @@
+#!/bin/bash                                                                                                                            
+# SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
+                                      
+# Takes 2 arguments and both are mandatory.
+# Relative path to directory where to place header file should be first argument.
+# Name of class to be used should be second argument.
+# First argument should always be at least `include` and if path contains subdirectories then the additional directory 
+# hierarchy should already have been added to both the `include` and `src` directories before calling this script.
+
+# IOW `./createclass include Player` will create `player.h` in `include` directory and `player.cpp` in `src` directory.
+# But if you want to for example add a Vertex class to a `Shaders` sub-directory of your `include` then a subdirectory 
+# with the name `Shaders` should already exist in both `include` and `src` before you call this script and the call
+# for that would be `./createclass include/shaders Vertex`
+
+replacePhrase /home/sethvan/myCommands/templates/projectFileTemplates/classTemplate.txt includename "${2^^}" "$1/${2,,}.h"
+replacePhrase "$1/${2,,}.h" className $2 "$1/${2,,}.h"
+
+
+CPPFILE=""
+INCPATH="$1"
+INCLUDELENGTH=${#INCPATH}
+SIMPLE="include"
+
+if [[ "$INCPATH" == "$SIMPLE" ]]; then
+    INCPATH="${2,,}.h"
+    CPPFILE="src/${2,,}.cpp"
+else
+    CPPFILE="src/${INCPATH:8:INCLUDELENGTH}/${2,,}.cpp"
+    INCPATH=${INCPATH:8:INCLUDELENGTH}/${2,,}.h    
+fi
+
+touch $CPPFILE
+
+replacePhrase CMakeLists.txt src/main.cpp "${CPPFILE} 
+src/main.cpp" CMakeLists.txt
+
+printf "#include \"$INCPATH\"" > $CPPFILE

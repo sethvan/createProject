@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.16)
+
+project( pName LANGUAGES "CXX" )
+
+add_executable( pName 
+src/main.cpp )
+
+target_include_directories( pName PRIVATE include )
+target_compile_features( pName PRIVATE cxx_std_17)
+target_link_options( pName PRIVATE -ldl -lglfw -lGLEW -lGL -lGLU -lglut -fsanitize=address )
+target_compile_options( pName PRIVATE 
+    -Wall -Wextra -Werror -Wl,-z,defs -ldl -lglfw -lGLEW -lGL -lGLU -lglut -fwrapv -Og
+    $<$<CONFIG:Debug>:
+        -D_GLIBCXX_ASSERTIONS=1 -ggdb3 -fno-omit-frame-pointer -faas -fasynchronous-unwind-tables -fsanitize=address -fstack-protector-all 
+    >
+)
+
