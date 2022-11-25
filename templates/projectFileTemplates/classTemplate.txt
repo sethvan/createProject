@@ -2,11 +2,12 @@
 #define _INCLUDED_includename_H
 
 class className {
-private:
+   private:
 
-public:
+   public:
     className();
     ~className();
+    
 };
 
 #endif // _INCLUDED_includename_H 

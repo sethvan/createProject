@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Sbsolute path to directory where you want to create project should be first argument.
+# Absolute path to directory where you want to create project should be first argument.
 # If you want it in the current directory put $(pwd).
 # Name of app to be used in files is the second argument, should be altogether, no spaces
 # because it will also be the directory and project name.
