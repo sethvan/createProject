@@ -1,4 +1,4 @@
-#!/bin/bash                                                                                                                            
+#!/bin/sh                                                                                                                            
 # SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
                                       
 # Takes 2 arguments and both are mandatory.
@@ -12,8 +12,11 @@
 # with the name `Shaders` should already exist in both `include` and `src` before you call this script and the call
 # for that would be `./createclass include/shaders Vertex`
 
-replacePhrase /home/sethvan/myCommands/templates/projectFileTemplates/classTemplate.txt includename "${2^^}" "$1/${2,,}.h"
-replacePhrase "$1/${2,,}.h" className $2 "$1/${2,,}.h"
+upperedSecond=$(echo $2 | tr [:lower:] [:upper:])
+loweredSecond=$(echo $2 | tr [:upper:] [:lower:])
+
+replacePhrase /home/sethvan/myCommands/templates/projectFileTemplates/classTemplate.txt includename $upperedSecond "$1/$loweredSecond.h"
+replacePhrase "$1/$loweredSecond.h" className $2 "$1/$loweredSecond.h"
 
 
 CPPFILE=""
@@ -21,12 +24,12 @@ INCPATH="$1"
 INCLUDELENGTH=${#INCPATH}
 SIMPLE="include"
 
-if [[ "$INCPATH" == "$SIMPLE" ]]; then
-    INCPATH="${2,,}.h"
-    CPPFILE="src/${2,,}.cpp"
+if [ "$INCPATH" = "$SIMPLE" ]; then
+    INCPATH="$loweredSecond.h"
+    CPPFILE="src/$loweredSecond.cpp"
 else
-    CPPFILE="src/${INCPATH:8:INCLUDELENGTH}/${2,,}.cpp"
-    INCPATH=${INCPATH:8:INCLUDELENGTH}/${2,,}.h    
+    CPPFILE="src/${INCPATH:8:INCLUDELENGTH}/$loweredSecond.cpp"
+    INCPATH=${INCPATH:8:INCLUDELENGTH}/$loweredSecond.h    
 fi
 
 touch $CPPFILE

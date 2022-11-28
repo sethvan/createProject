@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
 
 
-if [[ "$(pwd)" == "$HOME/myCommands" ]]; then
+if [ "$(pwd)" = "$HOME/myCommands" ]; then
     cd $HOME
     echo "Adding $HOME/myCommands/executables to PATH ..."
     echo "export PATH=\"$PATH:$HOME/myCommands/executables\"" >> .profile

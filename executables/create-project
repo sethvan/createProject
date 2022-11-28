@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
 
 # Absolute path to directory where you want to create project should be first argument.
@@ -6,15 +6,16 @@
 # Name of app to be used in files is the second argument, should be altogether, no spaces
 # because it will also be the directory and project name.
 
+loweredSecond=$( echo $2 | tr [:upper:] [:lower:] )
 cd $1
 mkdir $2
 cd $2
 mkdir build include src res
 touch src/main.cpp
-printf "#include <iostream> \n \n int main(){ \n \n \tstd::cout << \" Hello world! \" << std::endl; \n \n \treturn 0; \n \n }" > src/main.cpp 
+printf "#include <iostream> \n\nint main(){\n\n\tstd::cout << \" Hello world! \" << std::endl; \n\n\treturn 0;\n\n}" > src/main.cpp 
 
-replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/cmaketemplate.txt pName "${2,,}" CMakeLists.txt
-replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/runtemplate.txt pName $2 run
+replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/cmaketemplate.txt pName $loweredSecond CMakeLists.txt
+replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/runtemplate.txt pName $loweredSecond run
 chmod 755 run
 
 cp /home/$USER/myCommands/templates/projectFileTemplates/createclasstemplate.txt createclass

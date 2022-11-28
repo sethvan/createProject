@@ -33,12 +33,15 @@
 #include <iostream>
 #include <string>
 
-size_t getFileSize( FILE** fp, const char* filePath ) {
+void openFile( FILE** fp, const char* filePath ) {
     *fp = fopen( filePath, "r" );
     if ( *fp == NULL ) {
         fprintf( stderr, "%s does not exist!\n", filePath );
         exit( 1 );
     }
+}
+
+size_t getFileSize( FILE** fp ) {
     int count = 0;
     int c = 0;
 
@@ -49,7 +52,7 @@ size_t getFileSize( FILE** fp, const char* filePath ) {
     return ++count;
 }
 
-void getFileText( char* destination, size_t buffer_size, FILE** fp ) {
+void getTextAndCloseFile( char* destination, size_t buffer_size, FILE** fp ) {
     fread( destination, buffer_size, 1, *fp );
     destination[buffer_size - 1] = '\0';
     fclose( *fp );
@@ -58,10 +61,11 @@ void getFileText( char* destination, size_t buffer_size, FILE** fp ) {
 
 std::string txtFileToString( const char* filepath ) {
     FILE* fp;
-    size_t buffer_size = getFileSize( &fp, filepath );
-    char shaderCode[buffer_size];
-    getFileText( shaderCode, buffer_size, &fp );
-    std::string str( shaderCode );
+    openFile( &fp, filepath );
+    size_t buffer_size = getFileSize( &fp );
+    char fileText[buffer_size];
+    getTextAndCloseFile( fileText, buffer_size, &fp );
+    std::string str( fileText );
     return str;
 }
 
