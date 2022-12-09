@@ -12,12 +12,23 @@
 # with the name `Shaders` should already exist in both `include` and `src` before you call this script and the call
 # for that would be `./createclass include/shaders Vertex`
 
-upperedSecond=$(echo $2 | tr [:lower:] [:upper:])
-loweredSecond=$(echo $2 | tr [:upper:] [:lower:])
+#from https://github.com/dylanaraps/pure-sh-bible
+lstrip() {
+    # Usage: lstrip "string" "pattern"
+    printf '%s\n' "${1##$2}"
+}
 
-replacePhrase /home/sethvan/myCommands/templates/projectFileTemplates/classTemplate.txt includename $upperedSecond "$1/$loweredSecond.h"
-replacePhrase "$1/$loweredSecond.h" className $2 "$1/$loweredSecond.h"
+upperedSecondArgument=$(echo $2 | tr [:lower:] [:upper:])
+loweredSecondArgument=$(echo $2 | tr [:upper:] [:lower:])
+classTemplate=/home/$USER/createProject/templates/classTemplate.txt
 
+sed "s:includename:$upperedSecondArgument:g" $classTemplate > "$1/$loweredSecondArgument.h"
+sed "s:className:$2:g" "$1/$loweredSecondArgument.h" > dummy
+mv dummy "$1/$loweredSecondArgument.h"
+
+subpath=$(
+    IFS='include'
+)
 
 CPPFILE=""
 INCPATH="$1"
@@ -25,16 +36,19 @@ INCLUDELENGTH=${#INCPATH}
 SIMPLE="include"
 
 if [ "$INCPATH" = "$SIMPLE" ]; then
-    INCPATH="$loweredSecond.h"
-    CPPFILE="src/$loweredSecond.cpp"
+    INCPATH="$loweredSecondArgument.h"
+    CPPFILE="src/$loweredSecondArgument.cpp"
 else
-    CPPFILE="src/${INCPATH:8:INCLUDELENGTH}/$loweredSecond.cpp"
-    INCPATH=${INCPATH:8:INCLUDELENGTH}/$loweredSecond.h    
+    subpath=$(lstrip $1 'include/')
+    CPPFILE="src/$subpath/$loweredSecondArgument.cpp"
+    INCPATH=$subpath/$loweredSecondArgument.h    
 fi
+
+sed "s:src/main.cpp:$CPPFILE\nsrc/main.cpp:g" CMakeLists.txt > dummy
+mv dummy CMakeLists.txt
 
 touch $CPPFILE
 
-replacePhrase CMakeLists.txt src/main.cpp "${CPPFILE} 
-src/main.cpp" CMakeLists.txt
-
 printf "#include \"$INCPATH\"" > $CPPFILE
+printf "\n\n\n\n$2::$2(){}\n\n\n$2::~$2(){}" >> $CPPFILE
+

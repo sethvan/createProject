@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
+
+
+if [ "$(pwd)" = "$HOME/createProject" ]; then
+    echo "Adding symlink for $HOME/createProject/create-project to /home/$USER/.local/bin ..."
+    ln -s $HOME/createProject/create-project ~/.local/bin/create-project
+    echo "Finished"
+else
+    echo "Error: This directory myCommands/ must be placed inside your user home directory for this script to work properly."  
+fi
+
+
+

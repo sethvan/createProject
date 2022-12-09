@@ -6,7 +6,11 @@
 # Name of app to be used in files is the second argument, should be altogether, no spaces
 # because it will also be the directory and project name.
 
-loweredSecond=$( echo $2 | tr [:upper:] [:lower:] )
+loweredSecondArgument=$( echo $2 | tr [:upper:] [:lower:] )
+cmakeTemplate=/home/$USER/createProject/templates/cmaketemplate.txt
+runTemplate=/home/$USER/createProject/templates/runtemplate.txt
+createClassTemplate=/home/$USER/createProject/templates/createclasstemplate.txt
+
 cd $1
 mkdir $2
 cd $2
@@ -14,11 +18,11 @@ mkdir build include src res
 touch src/main.cpp
 printf "#include <iostream> \n\nint main(){\n\n\tstd::cout << \" Hello world! \" << std::endl; \n\n\treturn 0;\n\n}" > src/main.cpp 
 
-replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/cmaketemplate.txt pName $loweredSecond CMakeLists.txt
-replacePhrase /home/$USER/myCommands/templates/projectFileTemplates/runtemplate.txt pName $loweredSecond run
+sed "s/ProjectName/$loweredSecondArgument/g" $cmakeTemplate > CMakeLists.txt
+sed "s/ProjectName/$loweredSecondArgument/g" $runTemplate > run
 chmod 755 run
 
-cp /home/$USER/myCommands/templates/projectFileTemplates/createclasstemplate.txt createclass
+cp $createClassTemplate  createclass
 chmod 755 createclass
 
 cd ..
