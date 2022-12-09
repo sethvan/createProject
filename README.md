@@ -26,9 +26,11 @@ The project directory will come with:
 - `run` script that is used to call CMake to compile project and then send the execution file to top of project Directory where it is ran.
 - `createclass` that is used to create basic boilerplate for class .h file, creates a .cpp file and adds path of .cpp file to CMakeLists.txt.
 
+Unless you modify the CMakeLists.txt, you will need a compiler that can handle C++17 minimum and your CMake needs to be a minimum version of 3.16 . 
+
 There are some further notes in the script files if you view them, I would also recommend viewing the `createclass` script before attempting to run it.  
 
 If you use VS Code and would like the project to be opened there upon creation then just un-comment out the bottom line in the `create-project` script.  
 
-I may make this more extendible but there are also already many CMake boiler-plate apps currently available and most users should probably already be working on learning how to fill in and modify the CMake fields that are currently just being provided as they are. So we will see. It was in most part
+I may make this more extendible but there are also already many CMake boiler-plate apps currently available and most users should probably already be working on learning how to fill in and modify the CMake fields that are currently just being provided here as they are. So we will see. It was in most part
 a small and very rewarding learning project for shell scripting.  
