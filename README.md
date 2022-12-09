@@ -1,0 +1,34 @@
+# createProject
+#### Creates a barebone boiler-plate directory for a small to medium-sized CPP project on Unix-based systems.  
+
+To install, cd into your `~` directory and clone repository:
+```
+git clone https://github.com/sethvan/createProject.git
+```
+Then cd into `createProject` and run `build` script ( this just adds symlink of the command to your PATH ):
+```
+cd createProject && ./build
+```
+
+The `create-project` command is now ready to run on your system as follows:  
+```
+create-project <path to where project will be created> <name of project>
+```
+for example:
+```
+create-project ~/Desktop myApp
+```
+
+The project directory will come with:
+- Empty sub-directories `include` ( for .h files ), `res` ( for resources ) and `build` ( for CMake-generated code ).
+- `src` directory ( for .cpp files ) containing a "hello world" `main.cpp` file to start with.
+- `CMakeLists.txt` file set to C++17, many warning flags and an address sanitizer.
+- `run` script that is used to call CMake to compile project and then send the execution file to top of project Directory where it is ran.
+- `createclass` that is used to create basic boilerplate for class .h file, creates a .cpp file and adds path of .cpp file to CMakeLists.txt.
+
+There are some further notes in the script files if you view them, I wpuld also recommend viewing the `createclass` script before attempting to run it.  
+
+If you use VS Code and would like the project to be opened there upon creation then just un-comment out the bottom line in the `create-project` script.  
+
+I may make this more extendible but there are also already many CMake boiler-plate apps currently available and most users should probably already be working on learning how to fill in and modify the CMake fields that are currently just being provided as they are. So we will see. It was in most part
+a small and very rewarding learning project for shell scripting.  
