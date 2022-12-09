@@ -26,7 +26,7 @@ The project directory will come with:
 - `run` script that is used to call CMake to compile project and then send the execution file to top of project Directory where it is ran.
 - `createclass` that is used to create basic boilerplate for class .h file, creates a .cpp file and adds path of .cpp file to CMakeLists.txt.
 
-There are some further notes in the script files if you view them, I wpuld also recommend viewing the `createclass` script before attempting to run it.  
+There are some further notes in the script files if you view them, I would also recommend viewing the `createclass` script before attempting to run it.  
 
 If you use VS Code and would like the project to be opened there upon creation then just un-comment out the bottom line in the `create-project` script.  
 
