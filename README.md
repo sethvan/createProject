@@ -12,11 +12,11 @@ cd createProject && ./build
 
 The `create-project` command is now ready to run on your system as follows:  
 ```
-create-project <path to where project will be created> <name of project>
+create-project <name of project>
 ```
 for example:
 ```
-create-project ~/Desktop myApp
+create-project myApp
 ```
 
 The project directory will come with:
