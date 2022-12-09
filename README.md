@@ -14,10 +14,6 @@ The `create-project` command is now ready to run on your system as follows:
 ```
 create-project <name of project>
 ```
-for example:
-```
-create-project myApp
-```
 
 The project directory will come with:
 - Empty sub-directories `include` ( for .h files ), `res` ( for resources ) and `build` ( for CMake-generated code ).

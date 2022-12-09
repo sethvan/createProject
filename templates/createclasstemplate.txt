@@ -12,23 +12,25 @@
 # with the name `Shaders` should already exist in both `include` and `src` before you call this script and the call
 # for that would be `./createclass include/shaders Vertex`
 
+if [ $# -lt 2 ]; then
+    echo "Error: Command takes 2 arguments, $# provided."
+    exit 1
+fi
+
+upperedSecondArgument=$(echo $2 | tr [:lower:] [:upper:])
+loweredSecondArgument=$(echo $2 | tr [:upper:] [:lower:])
+
+foundFile=$( find include -name $loweredSecondArgument.h)
+if [ ${#foundFile} -gt 0 ]; then
+    echo "$foundFile already exists! Choose a different class name."
+    exit 1
+fi
+
 #from https://github.com/dylanaraps/pure-sh-bible
 lstrip() {
     # Usage: lstrip "string" "pattern"
     printf '%s\n' "${1##$2}"
 }
-
-upperedSecondArgument=$(echo $2 | tr [:lower:] [:upper:])
-loweredSecondArgument=$(echo $2 | tr [:upper:] [:lower:])
-classTemplate=/home/$USER/createProject/templates/classTemplate.txt
-
-sed "s:includename:$upperedSecondArgument:g" $classTemplate > "$1/$loweredSecondArgument.h"
-sed "s:className:$2:g" "$1/$loweredSecondArgument.h" > dummy
-mv dummy "$1/$loweredSecondArgument.h"
-
-subpath=$(
-    IFS='include'
-)
 
 CPPFILE=""
 INCPATH="$1"
@@ -40,9 +42,32 @@ if [ "$INCPATH" = "$SIMPLE" ]; then
     CPPFILE="src/$loweredSecondArgument.cpp"
 else
     subpath=$(lstrip $1 'include/')
+
+    if [ ${#subpath} = $INCLUDELENGTH ]; then
+        echo 'Error: first argument is an invalid include path'
+        exit 1
+    fi
+    if [ -d $1 ]; then
+        echo "Error: Directory $1 does not exist! Sub-directory $subpath must exist
+               in both include and src directories in order to run command \'$0 $1 $2\'"  
+        exit 1
+    fi
+
+    if [ -d src/$subpath ]; then
+        echo "Error: Directory src/$subpath does not exist! Sub-directory $subpath must exist
+               in both include and src directories in order to run command \'$0 $1 $2\'"  
+        exit 1
+    fi
+
     CPPFILE="src/$subpath/$loweredSecondArgument.cpp"
-    INCPATH=$subpath/$loweredSecondArgument.h    
+    INCPATH=$subpath/$loweredSecondArgument.h  # for appending later to ${CPPFILE}.cpp 
 fi
+
+classTemplate=/home/$USER/createProject/templates/classTemplate.txt
+
+sed "s:includename:$upperedSecondArgument:g" $classTemplate > "$1/$loweredSecondArgument.h"
+sed "s:className:$2:g" "$1/$loweredSecondArgument.h" > dummy
+mv dummy "$1/$loweredSecondArgument.h"
 
 sed "s:src/main.cpp:$CPPFILE\nsrc/main.cpp:g" CMakeLists.txt > dummy
 mv dummy CMakeLists.txt
