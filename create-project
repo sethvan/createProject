@@ -1,25 +1,22 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
 
-# Absolute path to directory where you want to create project should be first argument.
-# If you want it in the current directory put $(pwd).
-# Name of app to be used in files is the second argument, should be altogether, no spaces
+# Name of app to be used in files is the first argument, should be altogether, no spaces
 # because it will also be the directory and project name.
 
-loweredSecondArgument=$( echo $2 | tr [:upper:] [:lower:] )
+loweredFirstArgument=$( echo $1 | tr [:upper:] [:lower:] )
 cmakeTemplate=/home/$USER/createProject/templates/cmaketemplate.txt
 runTemplate=/home/$USER/createProject/templates/runtemplate.txt
 createClassTemplate=/home/$USER/createProject/templates/createclasstemplate.txt
 
+mkdir $1
 cd $1
-mkdir $2
-cd $2
 mkdir build include src res
 touch src/main.cpp
 printf "#include <iostream> \n\nint main(){\n\n\tstd::cout << \" Hello world! \" << std::endl; \n\n\treturn 0;\n\n}" > src/main.cpp 
 
-sed "s/ProjectName/$loweredSecondArgument/g" $cmakeTemplate > CMakeLists.txt
-sed "s/ProjectName/$loweredSecondArgument/g" $runTemplate > run
+sed "s/ProjectName/$loweredFirstArgument/g" $cmakeTemplate > CMakeLists.txt
+sed "s/ProjectName/$loweredFirstArgument/g" $runTemplate > run
 chmod 755 run
 
 cp $createClassTemplate  createclass
@@ -28,4 +25,4 @@ chmod 755 createclass
 
 # Uncomment the bottom line if you want the app to open your
 # project in VS Code upon finishing
-#cd .. && code $2
+#cd .. && code $1
