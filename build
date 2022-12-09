@@ -8,7 +8,7 @@ if [ "$(pwd)" = "$HOME/createProject" ]; then
     ln -s $HOME/createProject/create-project ~/.local/bin/create-project
     echo "Finished"
 else
-    echo "Error: This directory myCommands/ must be placed inside your user home directory for this script to work properly."  
+    echo "Error: This directory createProject/ must be placed inside your user home directory for this script to work properly."  
 fi
 
 
