@@ -25,5 +25,7 @@ chmod 755 run
 cp $createClassTemplate  createclass
 chmod 755 createclass
 
-cd ..
-code $2
+
+# Uncomment the bottom line if you want the app to open your
+# project in VS Code upon finishing
+#cd .. && code $2
