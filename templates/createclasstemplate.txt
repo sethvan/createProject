@@ -47,17 +47,17 @@ else
         echo 'Error: first argument is an invalid include path'
         exit 1
     fi
-    if [ -d $1 ]; then
-        echo "Error: Directory $1 does not exist! Sub-directory $subpath must exist
-               in both include and src directories in order to run command \'$0 $1 $2\'"  
+    if [ ! -d $1 ] || [ ! -d src/$subpath ]; then
+        echo "Error: Sub-directories with name $subpath/ must exist in both include/ and src/ 
+       in order to run command '$0 $1 $2'"  
         exit 1
     fi
 
-    if [ -d src/$subpath ]; then
-        echo "Error: Directory src/$subpath does not exist! Sub-directory $subpath must exist
-               in both include and src directories in order to run command \'$0 $1 $2\'"  
-        exit 1
-    fi
+    #if [ ! -d src/$subpath ]; then
+    #    echo "Error: Directory src/$subpath does not exist! Sub-directory $subpath must exist
+    #           in both include and src directories in order to run command \'$0 $1 $2\'"  
+    #    exit 1
+    #fi
 
     CPPFILE="src/$subpath/$loweredSecondArgument.cpp"
     INCPATH=$subpath/$loweredSecondArgument.h  # for appending later to ${CPPFILE}.cpp 
