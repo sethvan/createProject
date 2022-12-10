@@ -53,12 +53,6 @@ else
         exit 1
     fi
 
-    #if [ ! -d src/$subpath ]; then
-    #    echo "Error: Directory src/$subpath does not exist! Sub-directory $subpath must exist
-    #           in both include and src directories in order to run command \'$0 $1 $2\'"  
-    #    exit 1
-    #fi
-
     CPPFILE="src/$subpath/$loweredSecondArgument.cpp"
     INCPATH=$subpath/$loweredSecondArgument.h  # for appending later to ${CPPFILE}.cpp 
 fi
