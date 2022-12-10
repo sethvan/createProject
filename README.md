@@ -3,7 +3,7 @@
 
 To install, cd into your `~` directory and clone repository:
 ```
-git clone https://github.com/sethvan/createProject.git
+cd ~ && git clone https://github.com/sethvan/createProject.git
 ```
 Then cd into `createProject` and run `build` script ( this just adds symlink of the command to your PATH ):
 ```
