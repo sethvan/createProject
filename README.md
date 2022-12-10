@@ -19,8 +19,8 @@ The project directory will come with:
 - Empty sub-directories `include` ( for .h files ), `res` ( for resources ) and `build` ( for CMake-generated code ).
 - `src` directory ( for .cpp files ) containing a "hello world" `main.cpp` file to start with.
 - `CMakeLists.txt` file set to C++17, many warning flags and an address sanitizer.
-- `run` script that is used to call CMake to compile project and then send the execution file to top of project Directory where it is ran.
-- `createclass` that is used to create basic boilerplate for class .h file, creates a .cpp file and adds path of .cpp file to CMakeLists.txt.
+- `run` script that is used to call CMake to compile project and then send the execution file to top of project directory where it is ran.
+- `createclass` that is used to create basic boilerplate for class .h file, create a .cpp file and add path of .cpp file to CMakeLists.txt.
 
 Unless you modify the CMakeLists.txt, you will need a compiler that can handle C++17 minimum and your CMake needs to be a minimum version of 3.16 . 
 
