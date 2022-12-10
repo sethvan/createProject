@@ -30,3 +30,10 @@ If you use VS Code and would like the project to be opened there upon creation t
 
 I may make this more extendible but there are also already many CMake boiler-plate apps currently available and most users should probably already be working on learning how to fill in and modify the CMake fields that are currently just being provided here as they are. So we will see. It was in most part
 a small and very rewarding learning project for shell scripting.  
+<div align="center">
+  <video src="https://user-images.githubusercontent.com/78233173/206824922-5171771a-0ed0-49f5-b205-2e6433791d46.mp4" width=400/>
+<div/>
+
+
+
+
