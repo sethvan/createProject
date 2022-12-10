@@ -14,8 +14,8 @@ The `create-project` command is now ready to run on your system as follows:
 ```
 create-project <name of project>
 ```
-
-The project directory will come with:
+A project directory will be created inside the working directory where command is ran.
+This created created directory will come with:
 - Empty sub-directories `include` ( for .h files ), `res` ( for resources ) and `build` ( for CMake-generated code ).
 - `src` directory ( for .cpp files ) containing a "hello world" `main.cpp` file to start with.
 - `CMakeLists.txt` file set to C++17, many warning flags and an address sanitizer.
