@@ -1,10 +1,10 @@
 # createProject: my personalized C++ template
 
-The *createProject* software creates a barebone boiler-plate directory for a small to medium-sized CPP project on Unix-based systems.
+The *createProject* software creates a barebone boiler-plate directory for a small to medium-sized C++ project on Unix-like systems, particularly GNU/Linux.
 
 ### Installation
 
-The *createProject* software is installed per-user (can't be installed globally) and only works on POSIX-compatible systems, particularly Linux distros.
+The *createProject* software is installed per-user and can't be installed globally.
 
 1. Install gcc, cmake, git, and g++: (on Debian and derivatives) `apt install gcc cmake git g++`
 1. cd to your home directory: `cd ~`
