@@ -1,28 +1,40 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-only or GPL-3.0-or-later
 
-# Name of app to be used in files is the first argument, should be altogether, no spaces
+# Name of app to be used in files is the argument, should be altogether, no spaces
 # because it will also be the directory and project name.
 
-loweredFirstArgument=$( echo $1 | tr [:upper:] [:lower:] )
-cmakeTemplate=/home/$USER/createProject/templates/cmaketemplate.txt
-runTemplate=/home/$USER/createProject/templates/runtemplate.txt
-createClassTemplate=/home/$USER/createProject/templates/createclasstemplate.txt
 
-mkdir $1
-cd $1
+if [ ${#1} = 0 ]; then
+    echo 'Error: Missing project name'
+    exit 1
+fi
+
+if [ $# -gt 1 ]; then
+    echo "Error: Command takes 1 argument, $# provided."
+    exit 1
+fi
+
+projectName="$1"
+lowerCasedProjectName=$( echo "$projectName" | tr [:upper:] [:lower:] )
+cmakeTemplate=/home/$USER/createProject/templates/CMakeLists.template
+runTemplate=/home/$USER/createProject/templates/run.template
+createClassTemplate=/home/$USER/createProject/templates/createclass.template
+
+mkdir "$projectName"
+cd "$projectName"
 mkdir build include src res
 touch src/main.cpp
 printf "#include <iostream> \n\nint main(){\n\n\tstd::cout << \" Hello world! \" << std::endl; \n\n\treturn 0;\n\n}" > src/main.cpp 
 
-sed "s/ProjectName/$loweredFirstArgument/g" $cmakeTemplate > CMakeLists.txt
-sed "s/ProjectName/$loweredFirstArgument/g" $runTemplate > run
+sed "s/projectNamePlaceholder/$lowerCasedProjectName/g" $cmakeTemplate > CMakeLists.txt
+sed "s/projectNamePlaceholder/$lowerCasedProjectName/g" $runTemplate > run
 chmod 755 run
 
-cp $createClassTemplate  createclass
+cp "$createClassTemplate"  createclass
 chmod 755 createclass
 
 
 # Uncomment the bottom line if you want the app to open your
 # project in VS Code upon finishing
-#cd .. && code $1
+#cd .. && code "$projectName"

@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.16)
+
+project( projectNamePlaceholder LANGUAGES "CXX" )
+
+add_executable( projectNamePlaceholder 
+src/main.cpp )
+
+target_include_directories( projectNamePlaceholder PRIVATE include )
+target_compile_features( projectNamePlaceholder PRIVATE cxx_std_17)
+target_link_options( projectNamePlaceholder PRIVATE -fsanitize=address )
+target_compile_options( projectNamePlaceholder PRIVATE 
+    -Wall -Wextra -Werror -Wl,-z,defs -fwrapv -Og
+)
+
