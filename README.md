@@ -53,7 +53,7 @@ Example resulting file structure from `cd /home/user/code/ && create-project cod
 The following video demonstrates me running the `create-project` command on my Linux Mint 20 laptop.
 
 <div align="center">
-    <video width="200" src="./resources/demo-video.mp4" />
+    <video width="200" src="https://user-images.githubusercontent.com/78233173/206831297-c7798826-17fc-462f-a926-9490824f9977.mp4" />
 </div>
   
 ### Notes
