@@ -16,7 +16,7 @@ if [ $# -gt 1 ]; then
 fi
 
 projectName="$1"
-lowerCasedProjectName=$( echo "$projectName" | tr [:upper:] [:lower:] )
+lowerCasedProjectName=$( printf "%s" "$projectName" | tr [:upper:] [:lower:] )
 cmakeTemplate=/home/$USER/createProject/templates/CMakeLists.template
 runTemplate=/home/$USER/createProject/templates/run.template
 createClassTemplate=/home/$USER/createProject/templates/createclass.template
