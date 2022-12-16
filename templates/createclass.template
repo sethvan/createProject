@@ -38,7 +38,6 @@ INCPATH="$1"
 INCLUDELENGTH=${#INCPATH}
 SIMPLE="include"
 
-#
 if [ "$INCPATH" = "$SIMPLE" ]; then
     INCPATH="$loweredSecondArgument.h"
     CPPFILE="src/$loweredSecondArgument.cpp"
@@ -62,11 +61,9 @@ fi
 classTemplate=/home/$USER/createProject/templates/class.template
 
 sed "s:includename:$upperedSecondArgument:g" "$classTemplate" > "$1/$loweredSecondArgument.h"
-sed "s:className:$2:g" "$1/$loweredSecondArgument.h" > dummy
-mv dummy "$1/$loweredSecondArgument.h"
+printf "%s" "$(sed "s:className:$2:g" "$1/$loweredSecondArgument.h")" > "$1/$loweredSecondArgument.h"
 
-sed "s:src/main.cpp:$CPPFILE\nsrc/main.cpp:g" CMakeLists.txt > dummy
-mv dummy CMakeLists.txt
+printf "%s" "$(sed "s:src/main.cpp:$CPPFILE\nsrc/main.cpp:g" CMakeLists.txt)" > CMakeLists.txt
 
 touch "$CPPFILE"
 
