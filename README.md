@@ -28,7 +28,7 @@ After adding the above text to your `~/.profile`, you will either need to close 
 
 ### Usage
 
-Run `create-project <name of project>` in a terminal opened/cd-ed to your projects' directory:
+Run `create-project <name of project>` in a terminal opened/cd-ed to directory inside where you wish to create project:
 
 - `create-project <name of project>`
   - Creates a directory named `<name of project>` in your current working directory.
@@ -57,8 +57,6 @@ The following video demonstrates me running the `create-project` command on my L
 </div>
   
 ### Notes
-
-There's three important things to be aware of:
 
 * Unless you modify the CMakeLists.txt, you will need a compiler that can handle C++17 minimum and your CMake needs to be a minimum version of 3.16 . 
 
