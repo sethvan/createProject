@@ -1,5 +1,5 @@
-#ifndef _INCLUDED_includename_H
-#define _INCLUDED_includename_H
+#ifndef INCLUDED_includename_H
+#define INCLUDED_includename_H
 
 class className {
    private:
@@ -10,4 +10,4 @@ class className {
     
 };
 
-#endif // _INCLUDED_includename_H 
+#endif // INCLUDED_includename_H 
